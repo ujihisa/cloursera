@@ -48,7 +48,7 @@ public class Point implements Comparable<Point> {
 
     // slope between this point and that point
     public double slopeTo(Point that) {
-        return Double.parseDouble(clojure.lang.RT.var("cloursera.core", "point-compare-to").invoke(this, that).toString());
+        return Double.parseDouble(clojure.lang.RT.var("cloursera.core", "point-slope-to").invoke(this, that).toString());
     }
 
     // is this point lexicographically smaller than that one?
