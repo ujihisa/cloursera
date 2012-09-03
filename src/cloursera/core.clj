@@ -1,6 +1,10 @@
 (ns cloursera.core
   (:import [Point]))
 
+(def point-slope-order
+  (reify java.util.Comparator
+    (compare [_ x y] 1)))
+
 (defn point-slope-to [this that]
   (prn 'point-slope-to this that)
   1.2)

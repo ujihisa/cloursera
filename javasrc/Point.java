@@ -15,7 +15,7 @@ import java.util.Comparator;
 public class Point implements Comparable<Point> {
 
     // compare points by slope
-    public final Comparator<Point> SLOPE_ORDER;       // YOUR DEFINITION HERE
+    public final Comparator<Point> SLOPE_ORDER = (Comparator<Point>)clojure.lang.RT.var("cloursera.core", "point-slope-order").get();       // YOUR DEFINITION HERE
 
     private final int x;                              // x coordinate
     private final int y;                              // y coordinate
@@ -31,7 +31,6 @@ public class Point implements Comparable<Point> {
         /* DO NOT MODIFY */
         this.x = x;
         this.y = y;
-        this.SLOPE_ORDER = null;
     }
 
     // plot this point to standard drawing
