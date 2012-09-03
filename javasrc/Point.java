@@ -22,9 +22,16 @@ public class Point implements Comparable<Point> {
 
     // create the point (x, y)
     public Point(int x, int y) {
+        ClassLoader previous = Thread.currentThread().getContextClassLoader();
+        Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+        try {
+            clojure.lang.RT.loadResourceScript("cloursera/core.clj");
+        } catch (Exception e) {}
+
         /* DO NOT MODIFY */
         this.x = x;
         this.y = y;
+        this.SLOPE_ORDER = null;
     }
 
     // plot this point to standard drawing
@@ -41,13 +48,13 @@ public class Point implements Comparable<Point> {
 
     // slope between this point and that point
     public double slopeTo(Point that) {
-        /* YOUR CODE HERE */
+        return Double.parseDouble(clojure.lang.RT.var("cloursera.core", "point-compare-to").invoke(this, that).toString());
     }
 
     // is this point lexicographically smaller than that one?
     // comparing y-coordinates and breaking ties by x-coordinates
     public int compareTo(Point that) {
-        /* YOUR CODE HERE */
+        return Integer.parseInt(clojure.lang.RT.var("cloursera.core", "point-compare-to").invoke(this, that).toString());
     }
 
     // return string representation of this point
@@ -56,8 +63,20 @@ public class Point implements Comparable<Point> {
         return "(" + x + ", " + y + ")";
     }
 
-    // unit test
-    public static void main(String[] args) {
-        /* YOUR CODE HERE */
+    /*
+    private void invokeClojureFunc() {
+        try {
+            ClassLoader previous = Thread.currentThread().getContextClassLoader();
+            Thread.currentThread().setContextClassLoader(this.getClass().getClassLoader());
+
+            clojure.lang.RT.loadResourceScript("cloursera/core.clj");
+            clojure.lang.RT.var("cloursera.core", enableFunction).invoke(arg);
+
+            Thread.currentThread().setContextClassLoader(previous);
+        } catch (Exception e) {
+            System.out.println("Something broke setting up Clojure");
+            e.printStackTrace();
+        }
     }
+    */
 }
